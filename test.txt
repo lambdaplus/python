@@ -1,2 +1,0 @@
-I Like Python
-I Like Flask
