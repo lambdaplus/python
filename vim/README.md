@@ -1,5 +1,5 @@
 debian Linux vim configure
-solarized theme
+solarized&molokai&monokai theme
 tap四格
 自动行号
 ...
