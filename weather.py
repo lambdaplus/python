@@ -9,7 +9,6 @@ def get_weather(loaction):
 
     response = requests.get(url)
     data = response.json()
-    weather = data['result']
     keys = ['week', 'days', 'weather', 'temperature', 'winp']
 
     print('>>>未来%s七天天气如下<<<\n' %weather[0]['citynm'])
