@@ -2,6 +2,9 @@
 
 
 def binary_search(L, t):
+    if len(L) <= 1:
+        return L
+
     low, high = 0, len(L)
     while low < high:
         mid = int((low + high) / 2)
@@ -15,9 +18,9 @@ def binary_search(L, t):
     return low if L[low] == t else False
 
 if __name__ == '__main__':
-    L = [1, 2, 30, 55, 67, 88, 350, 670]
+    L = [1, 3, 65, 70, 77, 87, 987, 2345]  # list must be order
     print(binary_search(L, 1))
-    print(binary_search(L, 30))
+    print(binary_search(L, 3))
     print(binary_search(L, 350))
-    print(binary_search(L, 20))
-    print(binary_search(L, 670))
+    print(binary_search(L, 987))
+    print(binary_search(L, 2345))
