@@ -17,5 +17,4 @@ def insert_srot(L):
 
 if __name__ == '__main__':
     L = [randrange(100) for _ in range(10)]
-    print(L)
     print(insert_srot(L))
