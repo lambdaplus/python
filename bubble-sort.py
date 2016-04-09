@@ -3,11 +3,12 @@ from random import randrange
 
 
 def bubble_sort(L):
-    for m in range(len(L)):
-        n = 0
-        for n in range(len(L)):
-            if L[m] < L[n]:
-                L[m],  L[n] = L[n], L[m]
+    if len(L) < 2:
+        return L
+    for i in range(len(L)):
+        for j in range(1, len(L)):
+            if L[j - 1] > L[j]:
+                L[j - 1], L[j] = L[j], L[j - 1]
     return L
 
 if __name__ == '__main__':

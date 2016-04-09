@@ -1,14 +1,14 @@
-# -*-coding: utf-8 -*-
+# coding=utf-8
 from random import randrange
 
 
-def insert_srot(L):
-    if len(L) <= 0:
+def insert_sort(L):
+    if len(L) < 2:
         return L
     for i in range(1, len(L)):
         tmp = L[i]
         j = i - 1
-        while j >= 0 and tmp < L[j]:
+        while j >= 0 and L[j] > tmp:
             L[j + 1] = L[j]
             j -= 1
         L[j + 1] = tmp
@@ -16,5 +16,5 @@ def insert_srot(L):
     return L
 
 if __name__ == '__main__':
-    L = [randrange(100) for _ in range(10)]
-    print(insert_srot(L))
+    L = [randrange(1000) for _ in range(10)]
+    print(insert_sort(L))
