@@ -1,6 +1,8 @@
 ## 翻转列表内的元素
-用到list的pop和append方法。
 
+用到`list`的`pop`和`append`方法。
+
+```python
 # -*- coding: utf -8 -*-
 
 from random import randrange
@@ -16,3 +18,4 @@ if __name__ == "__main__":
     lst = [randrange(100) for _ in range(10)]
     print('This is original list\n', lst)
     print('This is reversed list\n', revers(lst))
+```
