@@ -5,7 +5,7 @@
 ```python
 # -*- coding: utf -8 -*-
 
-from random import randrange
+from random import randrange # 随机生成指定范围内的数字
 
 def revers(seq, L=None):
     while seq:
