@@ -34,3 +34,15 @@ if __name__ == '__main__':
     print(lst)
 ```
 ## 当然还有各种lambda奇淫技巧，不写了！
+
+------分割线------
+
+## 复杂度为O(n)的递归fibonacci seq。
+```python
+def fib(n):
+	if n <= 1:
+		return (n, 0)
+	else:
+		(a, b) = fib(n-1)
+		return (a+b, a)
+```
