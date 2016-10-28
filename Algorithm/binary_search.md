@@ -56,3 +56,29 @@ if __name__ == '__main__':
     value = int(input("Please input the value: "))
     print(binary_search_rec(lst, value, left, right))
 ```
+
+昨天面试,面试官出了一道算法题:
+
+> 有一个数组,其内元素先递增后递减,请找出其中的最大值.
+
+对于我来说,当时第一个想起来的是,`排序`但是转念间就知道肯定不是最好的啦.于是就在哪儿想啊想,还是想不起来.气氛挺尴尬的,外面也挺冷的(电话面试,外面安静).我想不起来,面试小哥也不急着催我,最后也算是在小哥的提示下,想起了怎么做啦!(太感谢小哥啦, 小哥好人! 喂, 你们几个不许笑啊喂!)
+
+当然是**二分**啦,下面是算法实现!
+
+```python
+# coding=utf-8
+
+
+def search_max_num(seq, left, right):
+    mid = (right + left) // 2
+    if left > right:
+        return seq[mid]
+    if seq[mid] > seq[mid - 1]:
+        return search_max_num(seq, mid + 1, right)
+    else:
+        return search_max_num(seq, left, mid - 1)
+
+if __name__ == "__main__":
+    seq = [32, 55, 54, 54, 54, 54, 32, 15, 6, 4, 2, 1]
+    print(search_max_num(seq, 0, len(seq)))
+```
