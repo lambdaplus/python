@@ -21,14 +21,17 @@ merge(*iterables, key=None, reverse=False)
     >>> list(merge(['dog', 'horse'], ['cat', 'fish', 'kangaroo'], key=len))
     ['dog', 'cat', 'fish', 'horse', 'kangaroo']
 '''
+
+
 def merge_sort(L):
     if len(L) < 2:
         return L
 
-    mid = int(len(L)/2)
+    mid = int(len(L) / 2)
     left = merge_sort(L[:mid])
     right = merge_sort(L[mid:])
     return list(merge(left, right))
+
 
 if __name__ == "__main__":
     L = [randrange(100) for _ in range(10)]

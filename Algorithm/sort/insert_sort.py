@@ -1,9 +1,12 @@
 # coding=utf-8
+
 from random import randrange
+
 
 def insert_sort(L):
     if len(L) < 2:
         return L
+
     for i in range(1, len(L)):
         tmp = L[i]
         j = i - 1
@@ -14,6 +17,6 @@ def insert_sort(L):
 
     return L
 
-#if __name__ == '__main__':
+# if __name__ == '__main__':
 #    L = [randrange(1000) for _ in range(10)]
 #    print(insert_sort(L))
