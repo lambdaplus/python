@@ -2,6 +2,7 @@
 
 from functools import wraps
 
+
 def log(func):
     @wraps(func)
     def wrapper(*args, **kw):
@@ -9,6 +10,7 @@ def log(func):
         result = func(*args, **kw)
         return result
     return wrapper
+
 
 @log
 def hello():

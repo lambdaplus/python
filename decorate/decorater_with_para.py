@@ -2,6 +2,7 @@
 
 from functools import wraps
 
+
 def logs(file="info.log"):
     def decorate(func):
         @wraps(func)
