@@ -23,14 +23,14 @@ class Node：
     '''
     ...
     '''
-    def insert(self, data): 
+    def insert(self, data):
         if data < self.data: # 树叉小于节点
             if self.left is None: # 并且左面的树叉为空
                 self.left = Node(data) # 当仁不让的插入
             else:                   # 非空的话
                 self.left.insert(data) # 以左树叉为节点继续插入
 
-        elif data > self.data: 
+        elif data > self.data:
             if self.right is None:
                 self.right = Node(data)
             else:
@@ -48,16 +48,16 @@ class Node：
     '''
     data为目标查询值，同时返回parent(父节点)便于定位。
     '''
-        if data < self.data: 
+        if data < self.data:
             if self.left is None:
                 return None, None
             else:
                 return self.left.search(data, self)
-     	
+
         elif data > self.data:
             if self.right is None:
                 return None, None
-            
+
             return self.right.search(data, self)
         else:
      	  #  return self.data, parent.data
@@ -73,6 +73,14 @@ class Node：
             self.right.print_tree()
 
 ```
+树的遍历又分为以下三种：
+
+1. 前序(root -> left -> right)
+2. 中序(left -> root -> right)
+3. 后序(left -> right -> root)
+
+调整`print_tree`函数里 `print(self.data)` 的顺序即可实现三种遍历方式。
+
 转眼间小树苗涨的太旺盛了，疯涨啊！！怎么办呢，剪几个枝吧。别怪我哦，小树苗！
 删除节点时，有三种可能的情况：
 
@@ -104,16 +112,16 @@ class Node：
     ```
 
     def delete(self, data):
-        node, parent = self.search(data) 
+        node, parent = self.search(data)
         chrildren = node.chrildren() # 子节点数目
-        if chrildren == 0: # 情况 1
+        if chrildren == 0: # 情况 1， 没有子节点，直接删除即可
             if parent.left is node: # 判断目标节点是其父节点的 左or右 节点
                 parent.left = None
             else:
                 parent.right = None
             del node
 
-        elif chrildren == 1: # 情况 2
+        elif chrildren == 1: # 情况 2， 有一个子节点，用子节点替换其即可
             if node.left:
                 tmp = node.left
             else:
@@ -124,23 +132,23 @@ class Node：
                 else:
                     parent.right = tmp
             del node
-        else:                # 情况 3 没看太懂，过两天再看吧
+        else:
         '''
-        第三种情况比较复杂
+        第三种情况比较复杂：
         1. 左节点0个子节点
         2. 左节点1个子节点
         3. 左节点2个子节点
         '''
             parent = node
-            successor = node.left
-            while successor.left:
+            successor = node.right
+            while successor.left:  # 递归思想，直至找到'最左'的子节点， 保持树的平衡，用右子节点的值替换
                 parent = successor
                 successor = successor.left
             node.data = successor.data
-            if parent.left = successor:
+            if parent.left ==  successor:
                 parent.left = successor.right
             else:
-                parent.left = successor.right
+                parent.right = successor.right
 
 
 # 接下来可以测试以下种的树怎么样啦。
@@ -164,5 +172,10 @@ root.print_tree()
 ```
 
 把自己理解的部分写了写。当做练习，就先当个α版吧。
-
 `2016-05-28`
+---
+更新
+---
+基本搞明白了
+完整代码[在这里]()
+`2017-03-22`
