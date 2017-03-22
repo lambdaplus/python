@@ -8,22 +8,19 @@
 from random import randrange
 
 def merge_two_list(lst1, lst2):
+    rst = []
     while lst1 and lst2:
-        lst3.append(lst1.pop(0) if lst1[0] <= lst2[0] else lst2.pop(0))
-
-    while lst1:
-        lst3.append(lst1.pop(0))
-
-    while lst2:
-        lst3.append(lst2.pop(0))
-
-    return lst3
+        if lst1[-1] > lst2[-1]:
+            rst.append(lst1.pop())
+        else:
+            rst.append(lst2.pop())
+    rst.reverse()        
+    return (lst1 or lst2) + rst
 
 if __name__ == "__main__":
-    lst3 = []
     lst1 = sorted([randrange(100) for _ in range(10)])
-    print(lst1)
+    print('lst1 is : ', lst1)
     lst2 = sorted([randrange(100) for _ in range(6)])
-    print(lst2)
-    print(merge_two_list(lst1, lst2))
+    print('lst2 is : ', lst2)
+    print('The merged list is\n', merge_two_list(lst1, lst2))
 ```
