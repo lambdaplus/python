@@ -10,17 +10,12 @@ def merge_sort(L):
         merged = []
 
         while left and right:
-            merged.append(left.pop(0) if left[0] <= right[0] else right.pop(0))
+            merged.append(left.pop(0) if left[0] <= right[0]
+                          else right.pop(0))
 
-        while left:
-            merged.append(left.pop(0))
+        return merged + (left or right)
 
-        while right:
-            merged.append(right.pop(0))
-
-        return merged
-
-    mid = int(len(L) / 2)
+    mid = len(L) // 2
     left = merge_sort(L[:mid])
     right = merge_sort(L[mid:])
     return merge(left, right)

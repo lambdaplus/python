@@ -1,4 +1,5 @@
 # coding=utf-8
+# 性能更好
 from random import randrange
 
 
