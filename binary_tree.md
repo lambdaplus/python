@@ -1,10 +1,13 @@
-畏惧了好久的二叉树，终于在近两天开搞了。二分法查找已在前几天完成，磨刀霍霍向猪羊，吼吼吼！
-何为二叉树？按照我目前的理解就是类似于发叉的树，树干上发两个叉或者一个(不发叉的树真不到有何用处)，发叉的地方称为**节点**。然后发的两个叉又可以继续像树干一样发叉，新发的叉有可以继续发叉，子又生子，孙又生孙，无穷尽也！但是**树的左边的叉的值小于节点值，右边的大于节点值**。
+---
+更新 `2017-03-22`
+---
 
-本文参考：
-[老齐的Github](https://github.com/qiwsir/algorithm/blob/master/binary_tree.md)
+畏惧了好久的二叉树，终于在近两天开搞了。二分法查找已在前几天完成，磨刀霍霍向猪羊，吼吼吼！ 何为二叉树？按照我目前的理解就是类似于发叉的树，树干上发两个叉或者一个(不发叉的树真不到有何用处)，发叉的地方称为**节点**。然后发的两个叉又可以继续像树干一样发叉，新发的叉有可以继续发叉，子又生子，孙又生孙，无穷尽也！但是**树的左边的叉的值小于节点值，右边的大于节点值**。
+
+本文参考： [老齐的Github](https://github.com/qiwsir/algorithm/blob/master/binary_tree.md)
 
 首先，建立一棵树。
+
 ```python
 class Node:
     def __init__(self, data):
@@ -12,7 +15,9 @@ class Node:
         self.right = None
         self.data = data
 ```
+
 这样，光秃秃的小树苗就种好了。接着就是茁长生长啦。浇水去喽！
+
 ```python
 class Node：
     '''
@@ -33,7 +38,9 @@ class Node：
         else:
             self.data = data
 ```
+
 浇完水后，小树苗噌噌的往上窜啊。
+
 ```python
 class Node：
     '''
@@ -55,19 +62,21 @@ class Node：
 
             return self.right.search(data, self)
         else:
-     	  #  return self.data, parent.data
+           #  return self.data, parent.data
             return self, parent
 ```
+
 树苗生长的那么好，想看看每个叉上都是啥呀，来来来，抬头往上看((其实是往下看啦)。
+
 ```python
-    def print_tree(self):
+def print_tree(self):
         if self.left:
             self.left.print_tree()
         print(self.data)
         if self.right:
             self.right.print_tree()
-
 ```
+
 树的遍历又分为以下三种：
 
 1. 前序(root -> left -> right)
@@ -76,102 +85,141 @@ class Node：
 
 调整`print_tree`函数里 `print(self.data)` 的顺序即可实现三种遍历方式。
 
-转眼间小树苗涨的太旺盛了，疯涨啊！！怎么办呢，剪几个枝吧。别怪我哦，小树苗！
-删除节点时，有三种可能的情况：
+转眼间小树苗涨的太旺盛了，疯涨啊！！怎么办呢，剪几个枝吧。别怪我哦，小树苗！ 删除节点时，有三种可能的情况：
 
 1. 目标节点下没有任何节点(0个)
 2. 目标节点下有一个节点
 3. 目标节点下有两个节点
 
 判断节点数目程序如下：
+
 ```python
 class Node：
-    ```
-    省略代码
-    ```
-    def chrildren(self):
-        count = 0
-        if self.left:
-            count += 1
+'''
+省略代码
+'''
+def chrildren(self):
+    count = 0
+    if self.left:
+        count += 1
 
-        if self.right:
-            count += 1
+    if self.right:
+        count += 1
 
-        return count
+    return count
 ```
+
 接下来就是删除操作啦。哦吼吼。
+
 ```python
 class Node：
-    ```
-    省略
-    ```
+'''
+省略
+'''
 
-    def delete(self, data):
-        node, parent = self.search(data)
-        chrildren = node.chrildren() # 子节点数目
-        if chrildren == 0: # 情况 1， 没有子节点，直接删除即可
-            if parent.left is node: # 判断目标节点是其父节点的 左or右 节点
-                parent.left = None
-            else:
-                parent.right = None
-            del node
-
-        elif chrildren == 1: # 情况 2， 有一个子节点，用子节点替换其即可
-            if node.left:
-                tmp = node.left
-            else:
-                tmp = node.right
-            if parent:
-                if parent.left is node:
-                    parent.left = tmp
-                else:
-                    parent.right = tmp
-            del node
+def delete(self, data):
+    node, parent = self.search(data)
+    chrildren = node.chrildren() # 子节点数目
+    if chrildren == 0: # 情况 1， 没有子节点，直接删除即可
+        if parent.left is node: # 判断目标节点是其父节点的 左or右 节点
+            parent.left = None
         else:
-        '''
-        第三种情况比较复杂：
-        1. 左节点0个子节点
-        2. 左节点1个子节点
-        3. 左节点2个子节点
-        '''
-            parent = node
-            successor = node.right
-            while successor.left:  # 递归思想，直至找到'最左'的子节点， 保持树的平衡，用右子节点的值替换
-                parent = successor
-                successor = successor.left
-            node.data = successor.data
-            if parent.left ==  successor:
-                parent.left = successor.right
-            else:
-                parent.right = successor.right
+            parent.right = None
+        del node
 
+    elif chrildren == 1: # 情况 2， 有一个子节点，用子节点替换其即可
+        if node.left:
+            tmp = node.left
+        else:
+            tmp = node.right
+        if parent:
+            if parent.left is node:
+                parent.left = tmp
+            else:
+                parent.right = tmp
+        del node
+    else:
+    '''
+    第三种情况比较复杂：
+    1\. 左节点0个子节点
+    2\. 左节点1个子节点
+    3\. 左节点2个子节点
+    '''
+        parent = node
+        successor = node.right
+        while successor.left:  # 递归思想，直至找到'最左'的子节点， 保持树的平衡，用右子节点的值替换
+            parent = successor
+            successor = successor.left
+        node.data = successor.data
+        if parent.left ==  successor:
+            parent.left = successor.right
+        else:
+            parent.right = successor.right
 
 # 接下来可以测试以下种的树怎么样啦。
-root = Node(11)
-root.insert(14)
-root.insert(9)
-root.insert(9)
-root.insert(7)
-root.insert(10)
-root.insert(4)
-root.insert(5)
-root.insert(6)
-root.insert(8)
-value, parent = root.search(10)
-print(value.data, parent.data)
-root.print_tree()
-print('*' * 20)
-root.delete(4)
-root.print_tree()
+
+root = Node(11) root.insert(14) root.insert(9) root.insert(9) root.insert(7) root.insert(10) root.insert(4) root.insert(5) root.insert(6) root.insert(8) value, parent = root.search(10) print(value.data, parent.data) root.print_tree() print('_'_ 20) root.delete(4) root.print_tree()
 
 ```
-
 把自己理解的部分写了写。当做练习，就先当个α版吧。
 `2016-05-28`
 
----
-更新 `2017-03-22`
----
 
 基本搞明白了
 完整代码[在这里](https://github.com/lambdaplus/python/blob/master/binary_tree.py)
+
+### 广度遍历和深度遍历二叉树！
+
+```python
+def lookup(root):
+    stack = [root]
+    while stack:
+        current = stack.pop()
+        print(current.data)
+        if current.left:
+            stack.append(current.left)
+        if current.right:
+            stack.append(current.right)
+
+
+def deep(root):
+    if not root:
+        return
+    deep(root.left)
+    deep(root.right)
+    print(root.data)
+```
+
+### 比较两棵树是否相同
+
+```python
+def is_same(t1, t2):
+    if t1 == None and t2 == None:
+        return True
+    elif t1 and t2:
+        return t1.data == t2.data and is_same(t1.left, t2.left)\
+                                  and is_same(t1.right, t2.right)
+    else:
+        return False
+```
+
+### 已知前序中序求后序
+
+前面说到：
+前序: root -> left -> right
+中序: left -> root -> right
+后序: left -> right -> root
+
+前序: 第一个值 A 即为根节点
+中序: A 的左边全为左子树，右边全是右子树
+
+```python
+def pre_in_post(pre_order, in_order):
+    if not pre_order:
+        return
+    post = Node(pre_order[0])
+    index = in_order.index(pre_order[0])
+    post.left = pre_in_post(pre_order[1:index+1], in_order[:index])
+    post.right = pre_in_post(pre_order[index+1:], in_order[index+1:])
+    return post
+```
