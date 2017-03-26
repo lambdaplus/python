@@ -1,6 +1,6 @@
 # Python
 
-[几种排序算法](https://github.com/lambdaplus/python/tree/master/Algorithm/sort)
+1. [几种排序算法](https://github.com/lambdaplus/python/tree/master/Algorithm/sort)
 [翻转列表](https://github.com/lambdaplus/python/blob/master/resver.md) 
 [二分法查找](https://github.com/lambdaplus/python/blob/master/Algorithm/binary_search.md)
 [一个异步爬虫](https://github.com/lambdaplus/python/blob/master/%E4%B8%80%E4%B8%AA%E5%BC%82%E6%AD%A5%E7%88%AC%E8%99%AB.md)
