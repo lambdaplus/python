@@ -8,3 +8,4 @@
 7. [装饰器](https://github.com/lambdaplus/python/tree/master/decorate)
 8. [二叉树](https://github.com/lambdaplus/python/blob/master/binary_tree.md)
 9. [Celery](https://github.com/lambdaplus/python/blob/master/celery_learn.md)
+10. [RabbitMQ](https://www.zybuluo.com/Scrazy/note/699512)
