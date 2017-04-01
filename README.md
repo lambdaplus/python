@@ -10,3 +10,4 @@
 8. [Celery](https://www.zybuluo.com/Scrazy/note/697561)
 9. [RabbitMQ](https://www.zybuluo.com/Scrazy/note/699512)
 10. [Python与数据库](https://www.zybuluo.com/Scrazy/note/702005)
+11. [新浪博客抓取及简单聚类](https://www.zybuluo.com/mdeditor#709348)
