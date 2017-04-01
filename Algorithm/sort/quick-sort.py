@@ -7,7 +7,7 @@ def quick_sort(seq):
         return seq
 
     mid = random.choice(seq)
-    small = [x for x in seq if x < mid]
+    small = [x for x in seq if x <= mid]
     big = [x for x in seq if x > mid]
     return quick_sort(small) + [mid] + quick_sort(big)
 
