@@ -11,3 +11,4 @@
 9. [RabbitMQ](https://www.zybuluo.com/Scrazy/note/699512)
 10. [Python与数据库](https://www.zybuluo.com/Scrazy/note/702005)
 11. [新浪博客抓取及简单聚类](https://www.zybuluo.com/mdeditor#709348)
+12. [Python 算法教程 笔记](https://www.zybuluo.com/Scrazy/note/530998)
