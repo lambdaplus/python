@@ -239,3 +239,69 @@ def pre_in_post(pre_order, in_order):
     post.right = pre_in_post(pre_order[index+1:], in_order[index+1:])
     return post
 ```
+### 已知前序中序构造出树
+```python
+# -*- coding:utf-8 -*-
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    # 返回构造的TreeNode根节点
+    def reConstructBinaryTree(self, pre, tin):
+        # write code here
+        if not pre:
+            return
+        tree = TreeNode(pre[0])
+        index = tin.index(pre[0])
+        tree.left = self.reConstructBinaryTree(pre[1:index+1],tin[:index])
+        tree.right = self.reConstructBinaryTree(pre[index+1:],tin[index+1:])
+        return tree
+
+    @classmethod
+    def print_tree(cls, tree):
+        if tree:
+            cls.print_tree(tree.left)
+            cls.print_tree(tree.right)
+            print(tree.val)
+
+pre = [1,2,3,4,5,6,7]
+tin = [3,2,4,1,6,5,7]
+s = Solution()
+t = s.reConstructBinaryTree(pre, tin)
+s.print_tree(t)
+```
+树的子结构
+
+```python
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def is_subtree(self, t1, t2):
+        if not t2:
+            return True
+        if not t1:
+            return False
+        if not t1.val == t2.val:
+            return False
+        return self.is_subtree(t1.left, t2.left) and self.is_subtree(t1.right, t2.right)
+        
+    def HasSubtree(self, pRoot1, pRoot2):
+        # write code here
+        result = False
+        if pRoot1 and pRoot2:
+        	if pRoot1.val == pRoot2.val:
+        	    result = self.is_subtree(pRoot1, pRoot2)
+        	if not result:
+        	    result = self.is_subtree(pRoot1.left, pRoot2)
+        	if not result:
+        	    result = self.is_subtree(pRoot1.right, pRoot2)
+		return result
+```
+

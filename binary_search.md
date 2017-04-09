@@ -107,3 +107,30 @@ if __name__ == "__main__":
     seq = [32, 55, 54, 54, 54, 54, 32, 15, 6, 4, 2, 1]
     print(search_max_num(seq, 0, len(seq)))
 ```
+###  二维数组的查找
+class Solution:
+    # array 二维列表
+
+    def find(self, target, array):
+        # write code here
+        for arr in array:
+            lft, rgt =0, len(arr) - 1
+            while lft <= rgt:
+                mid = (lft + rgt) // 2
+                if target > arr[mid]:
+                    lft = mid + 1
+                elif target < arr[mid]:
+                    rgt = mid - 1
+                else:
+                    return arr[mid]
+        return 'No target'
+
+
+target = 8
+array = [
+    [1, 3, 5, 7, 9],
+    [2, 4, 6, 8, 10]
+]
+solution = Solution()
+solution.find(target, array)
+```
