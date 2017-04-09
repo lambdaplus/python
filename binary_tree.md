@@ -189,6 +189,22 @@ def deep(root):
     deep(root.right)
     print(root.data)
 ```
+### 求最大树深
+
+```python
+# -*- coding:utf-8 -*-
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
+class Solution:
+    def TreeDepth(self, pRoot):
+        if not pRoot:
+            return 0
+        return max(self.TreeDepth(pRoot.left), self.TreeDepth(pRoot.right)) + 1
+```
 
 ### 比较两棵树是否相同
 
