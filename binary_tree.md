@@ -273,9 +273,10 @@ s = Solution()
 t = s.reConstructBinaryTree(pre, tin)
 s.print_tree(t)
 ```
-树的子结构
+### 树的子结构
 
 ```python
+求pRoot2 的子树是否为 pRoot2
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -283,8 +284,8 @@ s.print_tree(t)
 #         self.left = None
 #         self.right = None
 class Solution:
-    def is_subtree(self, t1, t2):
-        if not t2:
+    def is_subtree(self, t1, t2): 
+        if not t2:               # t2 is None 其为子树
             return True
         if not t1:
             return False
@@ -304,4 +305,26 @@ class Solution:
         	    result = self.is_subtree(pRoot1.right, pRoot2)
 		return result
 ```
+### 对称二叉树
 
+```
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+
+    def isSymmetrical(self, pRoot):
+        def is_same(p1, p2):
+            if not (p1 or p2):
+                return True
+            elif p1 and p2 and p1.val == p2.val:
+                return is_same(p1.left, p2.right) and is_same(p1.right, p2.left)
+            return False
+
+        if not pRoot:
+            return True
+        return is_same(pRoot.left, pRoot.right)
+```
