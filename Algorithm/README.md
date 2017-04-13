@@ -3,3 +3,4 @@
 3. [删除链表中的重复元素](https://www.zybuluo.com/Scrazy/note/720542)
 4. [数组中的数组成最小值](https://www.zybuluo.com/Scrazy/note/720582)
 5. [索引为index 的丑数](https://www.zybuluo.com/Scrazy/note/720587)
+6. [反转链表](https://www.zybuluo.com/Scrazy/note/721436)

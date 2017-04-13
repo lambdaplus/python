@@ -328,3 +328,27 @@ class Solution:
             return True
         return is_same(pRoot.left, pRoot.right)
 ```
+### 二叉树镜像
+
+```
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回镜像树的根节点
+    def Mirror(self, root):
+        # write code here
+        if not root:
+            return None
+        elif not (root.left or root.right):
+            return root
+    	
+        root.left, root.right = root.right, root.left
+        if root.left:
+            self.Mirror(root.left)
+        if root.right:
+            self.Mirror(root.right)
+``` 
