@@ -5,7 +5,6 @@ Created on Sun Apr 18 17:34:03 2021
 
 @author: lambda
 """
-
 import aiohttp
 import asyncio
 import re
@@ -16,6 +15,8 @@ import random
 import pandas as pd
 import datetime
 import time
+import requests as request
+from lxml import etree
 
 user_agent = [
     "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50",
@@ -56,13 +57,18 @@ user_agent = [
     "Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/999",
     # iPhone 6：
 	"Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25",
-
 ]
 
-today = datetime.date.today()
-yestoday = today - datetime.timedelta(days=1)
-print('今天获取的数据是: ',yestoday)
-fname = str(yestoday)+".xlsx"
+start = time.time()
+
+host = 'http://data.eastmoney.com/hsgtcg/list.html?DateType=DateType=%27jd%27'
+res = request.get(host)
+xml = etree.HTML(res.text)
+result = xml.xpath('/html/body/div[1]/div[8]/div[2]/div[2]/div[1]/div[1]/div/span/text()')[0]
+today = result[1:11]
+print(f'今天获取的数据是: {today}')
+
+fname = str(today)+".xlsx"
 fname1 = "PPOS_POTE_"+fname
 fname2 = "PPOS_POTE_SZ_"+fname
 
@@ -77,6 +83,7 @@ if os.path.exists(fname):
 
 heads = {'HdDate', 'SCode', 'SName', 'NewPrice', 'ShareSZ_Chg_One',  'ShareSZ_Chg_Rate_One', 'LTZB_One', 'ZZB_One'}
 rows = []
+
 # 获取网页信息
 async def fetch(session, url):
     headers = {'User-Agent': random.choice(user_agent)}
@@ -101,19 +108,19 @@ async def download(url):
         html = await fetch(session, url)
         await parser(html)
 
-urls = [f'http://dcfm.eastmoney.com/EM_MutiSvcExpandInterface/api/js/get?type=HSGT20_GGTJ_SUM&token=894050c76af8597a853f5b408b759f5d&st=ShareSZ_Chg_One&sr=-1&p='+str(p)+'&ps=50&js=var%20mXyeKPjW={pages:(tp),data:(x)}&filter=(DateType=%27jd%27%20and%20HdDate=%27'+str(yestoday)+'%27)&rt=53931781' for p in range(1, 31)]
+#urls = [f'http://dcfm.eastmoney.com/em_mutisvcexpandinterface/api/js/get?callback=jQuery112305322211230994847_1618827285261&st=ShareSZ_Chg_One&sr=-1&ps=50&p='+str(p)+'&type=HSGT20_GGTJ_SUM&token=894050c76af8597a853f5b408b759f5d&js=%7B%22data%22%3A(x)%2C%22pages%22%3A(tp)%2C%22font%22%3A(font)%7D&filter=(DateType%3D%27jd%27)(HdDate%3D%27'+str(today)+'%27)' for p in range(1, 31)]
+urls = [f'http://dcfm.eastmoney.com/EM_MutiSvcExpandInterface/api/js/get?type=HSGT20_GGTJ_SUM&token=894050c76af8597a853f5b408b759f5d&st=ShareSZ_Chg_One&sr=-1&p='+str(p)+'&ps=50&js=var%20mXyeKPjW={pages:(tp),data:(x)}&filter=(DateType=%27jd%27%20and%20HdDate=%27'+str(today)+'%27)&rt=53931781' for p in range(1, 31)]
 
 # 利用asyncio模块进行异步IO处理
 async def main():
     await asyncio.gather(*[download(url) for url in urls])
-
-start = time.time()                      
+               
 asyncio.run(main())
 # 将rows转化为pandas中的DataFrame
 df = pd.DataFrame(rows)
 df.columns = ['日期', '代码', '名称', '最新股价' , '市值', '市值增幅', '占流通股比', '占总股比']
 # 从大到小排序
-df.sort_values(by='市值')
+df.sort_values(by='市值', ascending=False)
 try:
     df.to_excel(fname) # 保存成Excel文件
 except Exception as e:
