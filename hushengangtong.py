@@ -72,10 +72,10 @@ fname = str(today)+".xlsx"
 fname1 = "PPOS_POTE_"+fname
 fname2 = "PPOS_POTE_SZ_"+fname
 
-file_path = '/home/lambda/Documents/jiatou'
-if not os.path.exists(file_path):
-    os.mkdir(file_path)
-os.chdir(file_path)
+file_path = './'
+#if not os.path.exists(file_path):
+#    os.mkdir(file_path)
+#os.chdir(file_path)
 
 if os.path.exists(fname):
     print('文件已存在，明天再来吧')
