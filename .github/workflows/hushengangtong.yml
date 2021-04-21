@@ -36,4 +36,4 @@ jobs:
           pip install lxml
           pip install pandas
       - name: Download files
-        run: python -i ./husheng_action.py
+        run: python ./husheng_action.py
